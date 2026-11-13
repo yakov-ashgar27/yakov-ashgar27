@@ -1,6 +1,6 @@
 ### Hi, I'm Yakov 👋
 
-Information Systems student. I build complete products end to end: requirements and design documents, the code, tests, CI and a live deployment. I work with AI as a pair-programmer ([Claude Code](https://claude.com/claude-code)) and say so openly. Every repository has a **"How this was built"** section, and the commits written with AI help are marked `Co-Authored-By: Claude`.
+Information Systems student. I build complete products end to end: requirements and design documents, the code, tests, CI and a live deployment.
 
 ## Projects
 
@@ -14,4 +14,3 @@ Information Systems student. I build complete products end to end: requirements 
 
 - **Engineering beyond the code:** requirements (user stories, ERD, DFD), RBAC, migrations, offline sync, CI that tests on several databases, and real-device testing that feeds back into calibration.
 - **Shipping:** each project can be opened or installed with one click, as a PWA, a Windows shortcut or a cloud deployment.
-- **Using AI responsibly:** I own the product, the design decisions and the testing, and the history shows how every piece was made.

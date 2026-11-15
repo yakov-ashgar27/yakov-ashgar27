@@ -2,6 +2,21 @@
 
 Information Systems student. I build complete products end to end: requirements and design documents, the code, tests, CI and a live deployment.
 
+## Featured: PulsePort Analytics, statistics that turn product data into decisions
+
+<a href="https://yakov-ashgar27.github.io/PulsePort-Analytics/"><img src="https://github.com/yakov-ashgar27/PulsePort-Analytics/raw/main/docs/screenshots/ab-lab.png" alt="PulsePort A/B Testing Lab stopping an underpowered experiment from shipping" width="760"></a>
+
+"Variant B is up 3%, ship it!" is how teams roll out features that do nothing. PulsePort analyses funnels, A/B tests and AI-model evaluations on **your own data** and answers with the statistical test behind every claim and a clear verdict: GO, NO-GO, KEEP RUNNING or STOP.
+
+- **Catches false positives:** a +2.9% lift with p = 0.18 is flagged KEEP RUNNING. The test has only 63% power at a pre-registered +5% effect, and about 48 more days are needed. It also runs a sample-ratio-mismatch check, Fisher's exact test for small samples, Holm correction across variants, and frequentist and Bayesian inference side by side (P(B>A), expected loss).
+- **Finds where users drop off, and who:** every segment *and segment pair* is tested at every funnel step with Benjamini–Hochberg FDR control. On the e-commerce sample it pinpoints mobile users in Brazil at checkout (−31.8 pp, q < 0.0001) and links the drop to page-load latency.
+- **One engine, verified twice:** a SciPy engine on the server and a TypeScript port in the browser, checked against SciPy reference values in 22 parity test groups. Uploaded data is analysed locally and never leaves the device. Read-only connectors cover PostgreSQL, MySQL, SQLite and Google Analytics 4, and CI proves on real databases that writes are refused.
+- **Built like production:** analytical SQL with CTEs, window functions and `PERCENTILE_CONT` on PostgreSQL 16, about 80 tests, a 4-job CI with live PostgreSQL and MySQL, a one-command Docker setup, and a free live app rebuilt from the real pipeline on every push.
+
+**Stack:** Python 3.13 · FastAPI · SciPy / NumPy · PostgreSQL 16 (advanced SQL) · React · TypeScript · Tailwind · Recharts · Docker · GitHub Actions · GitHub Pages
+
+[**Open the live app →**](https://yakov-ashgar27.github.io/PulsePort-Analytics/) · [**View the repo →**](https://github.com/yakov-ashgar27/PulsePort-Analytics)
+
 ## Featured: WiFi-Doctor, network root cause analysis
 
 <a href="https://github.com/yakov-ashgar27/wifi-doctor"><img src="https://github.com/yakov-ashgar27/wifi-doctor/raw/main/docs/dashboard.png" alt="WiFi-Doctor dashboard diagnosing bufferbloat" width="760"></a>
@@ -43,6 +58,7 @@ A streaming system that scores every card transaction as it arrives and decides 
 ## What I focus on
 
 - **Engineering beyond the code:** requirements (user stories, ERD, DFD), RBAC, migrations, offline sync, CI that tests on several databases, and real-device testing that feeds back into calibration.
+- **Statistics and experimentation:** A/B testing done right (power, SRM checks, multiple-comparison control, Bayesian decision rules) and analytics verified against reference implementations instead of trusted blindly.
 - **Data and real-time systems:** streaming pipelines, explainable scoring that combines rules with ML, and metrics measured against ground truth instead of guessed.
 - **Systems and networking:** active network probing with graceful privilege fallbacks, statistical anomaly detection, and testing on real hardware to find the bugs that CI can't.
 - **Shipping:** each project can be opened or installed with one click, as a PWA, a Windows shortcut or a cloud deployment.

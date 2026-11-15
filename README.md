@@ -2,63 +2,31 @@
 
 Information Systems student. I build complete products end to end: requirements and design documents, the code, tests, CI and a live deployment.
 
-## Featured: PulsePort Analytics, statistics that turn product data into decisions
+Every project below has automated tests, CI on every push and a one-click way to run it. Each one also has a measured result rather than just a feature list.
 
-<a href="https://yakov-ashgar27.github.io/PulsePort-Analytics/"><img src="https://github.com/yakov-ashgar27/PulsePort-Analytics/raw/main/docs/screenshots/ab-lab.png" alt="PulsePort A/B Testing Lab stopping an underpowered experiment from shipping" width="760"></a>
+## Projects
 
-"Variant B is up 3%, ship it!" is how teams roll out features that do nothing. PulsePort analyses funnels, A/B tests and AI-model evaluations on **your own data** and answers with the statistical test behind every claim and a clear verdict: GO, NO-GO, KEEP RUNNING or STOP.
+| Project | What it does | Proof | Stack | Try it |
+| --- | --- | --- | --- | --- |
+| [**PulsePort Analytics**](https://github.com/yakov-ashgar27/PulsePort-Analytics) | Analyses funnels, A/B tests and AI-model evaluations on your own data, shows the statistical test behind every claim, and gives a clear GO / NO-GO verdict. | Flags a "+2.9% win" with p = 0.18 as KEEP RUNNING (63% power). Its SciPy engine and in-browser TypeScript port agree in 22 parity test groups. About 80 tests. | Python · FastAPI · SciPy · PostgreSQL 16 · React · TypeScript | [Live app](https://yakov-ashgar27.github.io/PulsePort-Analytics/) |
+| [**WiFi-Doctor**](https://github.com/yakov-ashgar27/wifi-doctor) | Probes Wi-Fi, ISP and DNS every 1.5 s, names the layer that is failing, and gives a confidence score and the fix. It uses adaptive z-score baselines, reads the Wi-Fi signal and channel, and runs an active bufferbloat test. | Validated on a real laptop: bufferbloat grade C in 3 of 3 runs and all 4 fault types diagnosed. Field testing found 5 bugs that CI missed. 65 tests. | Python · FastAPI · asyncio · NumPy · React · TypeScript · Docker | [One-click Windows launcher](https://github.com/yakov-ashgar27/wifi-doctor#quickstart) |
+| [**GuardStream**](https://github.com/yakov-ashgar27/guardstream) | Scores every card transaction as it arrives (APPROVE, REVIEW or BLOCK) with business rules plus an Isolation Forest, and gives analysts a live dashboard. | Flags about 98% of simulated fraud with about 1.2% false positives, in about 14 ms per decision. | FastAPI · Redis Streams · PostgreSQL · scikit-learn · React · Docker | `docker compose up` |
+| [**FitVision AI**](https://github.com/yakov-ashgar27/fitvision-ai) | Final project. The phone camera tracks your skeleton, counts reps and corrects your technique in real time, and trainers get analytic reports. | The video never leaves the device: pose estimation runs in a Web Worker. | React PWA · MediaPipe · FastAPI · PostgreSQL / SQL Server · Redis + RQ | [Live app](https://fitvision-ai-naoj.onrender.com) |
+| [**yakov.LLM**](https://github.com/yakov-ashgar27/yakov.LLM) | An AI assistant that has read all of my repos. Every answer cites the exact file and lines, and it re-indexes itself when I push. | Its search engine, written from scratch (BM25, Hebrew + code tokenizer), puts the right file in the top 5 for 87% of test questions. | Python (no dependencies) · JavaScript · LLM APIs · SSE | [Try it](https://yakov-ashgar27.github.io/yakov.LLM/) |
+| [**The Map Lies**](https://github.com/yakov-ashgar27/the-map-lies) | A puzzle-stealth game where the minimap always lies. | Seeded procedural levels, plus a validator that proves every lie can be found without guessing. | React · TypeScript · Vite · PWA | [Play](https://yakov-ashgar27.github.io/the-map-lies/) |
+| [**Bomberman**](https://github.com/yakov-ashgar27/Bomberman) | Software-engineering course project: a full Bomberman clone with a BFS-chasing enemy, chain reactions and 5 levels, in Hebrew and English. | 84 tests, plus SRS, presentation and work plan. | Python · Pygame · pytest | `python main.py` |
 
-- **Catches false positives:** a +2.9% lift with p = 0.18 is flagged KEEP RUNNING. The test has only 63% power at a pre-registered +5% effect, and about 48 more days are needed. It also runs a sample-ratio-mismatch check, Fisher's exact test for small samples, Holm correction across variants, and frequentist and Bayesian inference side by side (P(B>A), expected loss).
-- **Finds where users drop off, and who:** every segment *and segment pair* is tested at every funnel step with Benjamini–Hochberg FDR control. On the e-commerce sample it pinpoints mobile users in Brazil at checkout (−31.8 pp, q < 0.0001) and links the drop to page-load latency.
-- **One engine, verified twice:** a SciPy engine on the server and a TypeScript port in the browser, checked against SciPy reference values in 22 parity test groups. Uploaded data is analysed locally and never leaves the device. Read-only connectors cover PostgreSQL, MySQL, SQLite and Google Analytics 4, and CI proves on real databases that writes are refused.
-- **Built like production:** analytical SQL with CTEs, window functions and `PERCENTILE_CONT` on PostgreSQL 16, about 80 tests, a 4-job CI with live PostgreSQL and MySQL, a one-command Docker setup, and a free live app rebuilt from the real pipeline on every push.
-
-**Stack:** Python 3.13 · FastAPI · SciPy / NumPy · PostgreSQL 16 (advanced SQL) · React · TypeScript · Tailwind · Recharts · Docker · GitHub Actions · GitHub Pages
-
-[**Open the live app →**](https://yakov-ashgar27.github.io/PulsePort-Analytics/) · [**View the repo →**](https://github.com/yakov-ashgar27/PulsePort-Analytics)
-
-## Featured: WiFi-Doctor, network root cause analysis
-
-<a href="https://github.com/yakov-ashgar27/wifi-doctor"><img src="https://github.com/yakov-ashgar27/wifi-doctor/raw/main/docs/dashboard.png" alt="WiFi-Doctor dashboard diagnosing bufferbloat" width="760"></a>
-
-"The Internet is slow" can mean weak Wi-Fi, a saturated link, a congested ISP or a slow DNS server. WiFi-Doctor probes every layer of the path every 1.5 seconds and names the one that is failing, in plain English, with a confidence score and the fix.
-
-- **Explainable RCA engine:** a deterministic decision tree over gateway, WAN and DNS latency, jitter and loss. It is combined with adaptive baselines (a robust median/MAD z-score per hop), so it catches degradations that are abnormal *for this network* even below the static thresholds.
-- **Physical-layer evidence:** reads RSSI, band and channel from `netsh` (locale-tolerant, works on Hebrew Windows), `iw` and macOS, then cites them in the diagnosis: *"weak Wi-Fi signal (−78 dBm) on 2.4 GHz channel 6: switch to 5 GHz"*.
-- **Active bufferbloat test:** an 8-second load test that compares loaded and unloaded latency and grades the connection A+ to F. It has a concurrency guard and a hard timeout.
-- **Validated on a real laptop, not just in CI:** the test graded the home network **C** in 3 of 3 runs (+71 to +107 ms under load), and all four fault simulations were diagnosed correctly. Field testing found 5 bugs that 60+ unit tests missed; each is fixed and documented with a regression test.
-
-**Stack:** Python 3.13 · FastAPI · WebSockets · asyncio · NumPy · scapy / ICMP / ping fallback chain · SQLite · React · TypeScript · Tailwind · Recharts · Docker · GitHub Actions
-
-[**View the repo →**](https://github.com/yakov-ashgar27/wifi-doctor) · [**Release notes →**](https://github.com/yakov-ashgar27/wifi-doctor/releases/tag/v1.1.1)
-
-## Featured: GuardStream, real-time fraud detection
-
-<a href="https://github.com/yakov-ashgar27/guardstream"><img src="https://github.com/yakov-ashgar27/guardstream/raw/main/docs/dashboard.jpg" alt="GuardStream SOC dashboard" width="760"></a>
-
-A streaming system that scores every card transaction as it arrives and decides APPROVE, REVIEW or BLOCK, with a live dashboard for fraud analysts.
-
-- **Hybrid engine:** business rules over Redis sliding windows (velocity, impossible travel, high amount) plus an Isolation Forest, with a guard I added for its blind spot: values outside the training range.
-- **Measured on the running stack:** about 98% of simulated fraud flagged, about 1.2% false positives, and an average of about 14 ms per decision.
-- **Built like production:** Redis Streams consumer group with crash recovery, PostgreSQL audit trail for analyst decisions, CI on every push, and one-command setup with Docker Compose.
-
-**Stack:** Python 3.13 · FastAPI · WebSockets · Redis Streams · PostgreSQL · scikit-learn · React · TypeScript · Tailwind · Recharts · Docker · GitHub Actions
-
-[**View the repo →**](https://github.com/yakov-ashgar27/guardstream)
-
-## More projects
-
-| Project | What it is | Stack | Try it |
-| --- | --- | --- | --- |
-| [**FitVision AI**](https://github.com/yakov-ashgar27/fitvision-ai) | Final project. The phone camera tracks your skeleton, counts reps and corrects your technique in real time, and trainers get analytic reports. The video never leaves the device. | React PWA · TypeScript · MediaPipe (Web Worker) · FastAPI · SQLAlchemy · PostgreSQL / SQL Server · Redis + RQ · GitHub Actions | [Live app](https://fitvision-ai-naoj.onrender.com) |
-| [**yakov.LLM**](https://github.com/yakov-ashgar27/yakov.LLM) | An AI assistant that has read all of my repos. Every answer cites the exact file and lines, and it re-indexes itself when I push. Search engine written from scratch (BM25, Hebrew + code tokenizer): the right file is in the top 5 for 87% of test questions. | Python (no dependencies) · JavaScript · LLM APIs (Groq, Claude) · SSE · GitHub Actions | [Try it](https://yakov-ashgar27.github.io/yakov.LLM/) |
-| [**The Map Lies**](https://github.com/yakov-ashgar27/the-map-lies) | A puzzle-stealth game where the minimap always lies. Seeded procedural levels and a validator that proves every lie can be found without guessing. | React · TypeScript · Vite · PWA | [Play](https://yakov-ashgar27.github.io/the-map-lies/) |
-| [**Bomberman**](https://github.com/yakov-ashgar27/Bomberman) | Software-engineering course project: a full Bomberman clone with a BFS-chasing enemy, chain reactions, 5 levels, Hebrew and English, plus SRS, presentation and work plan. | Python · Pygame · pytest (84 tests) | Run `python main.py` |
+<table>
+  <tr>
+    <td align="center"><a href="https://yakov-ashgar27.github.io/PulsePort-Analytics/"><img src="https://github.com/yakov-ashgar27/PulsePort-Analytics/raw/main/docs/screenshots/ab-lab.png" alt="PulsePort A/B Testing Lab" width="260"></a><br><sub>PulsePort: A/B Testing Lab</sub></td>
+    <td align="center"><a href="https://github.com/yakov-ashgar27/wifi-doctor"><img src="https://github.com/yakov-ashgar27/wifi-doctor/raw/main/docs/dashboard.png" alt="WiFi-Doctor dashboard" width="260"></a><br><sub>WiFi-Doctor: live RCA dashboard</sub></td>
+    <td align="center"><a href="https://github.com/yakov-ashgar27/guardstream"><img src="https://github.com/yakov-ashgar27/guardstream/raw/main/docs/dashboard.jpg" alt="GuardStream SOC dashboard" width="260"></a><br><sub>GuardStream: fraud SOC dashboard</sub></td>
+  </tr>
+</table>
 
 ## What I focus on
 
 - **Engineering beyond the code:** requirements (user stories, ERD, DFD), RBAC, migrations, offline sync, CI that tests on several databases, and real-device testing that feeds back into calibration.
-- **Statistics and experimentation:** A/B testing done right (power, SRM checks, multiple-comparison control, Bayesian decision rules) and analytics verified against reference implementations instead of trusted blindly.
-- **Data and real-time systems:** streaming pipelines, explainable scoring that combines rules with ML, and metrics measured against ground truth instead of guessed.
+- **Data and real-time systems:** streaming pipelines, explainable scoring that combines rules with ML, statistics you can trust, and metrics measured against ground truth instead of guessed.
 - **Systems and networking:** active network probing with graceful privilege fallbacks, statistical anomaly detection, and testing on real hardware to find the bugs that CI can't.
-- **Shipping:** each project can be opened or installed with one click, as a PWA, a Windows shortcut or a cloud deployment.
+- **Shipping:** each project can be opened or installed with one click, as a PWA, a Windows launcher or a cloud deployment.

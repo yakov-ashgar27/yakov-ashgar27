@@ -2,7 +2,21 @@
 
 Information Systems student. I build complete products end to end: requirements and design documents, the code, tests, CI and a live deployment.
 
-## Projects
+## Featured: GuardStream, real-time fraud detection
+
+<a href="https://github.com/yakov-ashgar27/guardstream"><img src="https://github.com/yakov-ashgar27/guardstream/raw/main/docs/dashboard.jpg" alt="GuardStream SOC dashboard" width="760"></a>
+
+A streaming system that scores every card transaction as it arrives and decides APPROVE, REVIEW or BLOCK, with a live dashboard for fraud analysts.
+
+- **Hybrid engine:** business rules over Redis sliding windows (velocity, impossible travel, high amount) plus an Isolation Forest, with a guard I added for its blind spot: values outside the training range.
+- **Measured on the running stack:** about 98% of simulated fraud flagged, about 1.2% false positives, and an average of about 14 ms per decision.
+- **Built like production:** Redis Streams consumer group with crash recovery, PostgreSQL audit trail for analyst decisions, CI on every push, and one-command setup with Docker Compose.
+
+**Stack:** Python 3.13 · FastAPI · WebSockets · Redis Streams · PostgreSQL · scikit-learn · React · TypeScript · Tailwind · Recharts · Docker · GitHub Actions
+
+[**View the repo →**](https://github.com/yakov-ashgar27/guardstream)
+
+## More projects
 
 | Project | What it is | Stack | Try it |
 | --- | --- | --- | --- |
@@ -14,4 +28,5 @@ Information Systems student. I build complete products end to end: requirements 
 ## What I focus on
 
 - **Engineering beyond the code:** requirements (user stories, ERD, DFD), RBAC, migrations, offline sync, CI that tests on several databases, and real-device testing that feeds back into calibration.
+- **Data and real-time systems:** streaming pipelines, explainable scoring that combines rules with ML, and metrics measured against ground truth instead of guessed.
 - **Shipping:** each project can be opened or installed with one click, as a PWA, a Windows shortcut or a cloud deployment.

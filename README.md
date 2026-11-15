@@ -2,6 +2,21 @@
 
 Information Systems student. I build complete products end to end: requirements and design documents, the code, tests, CI and a live deployment.
 
+## Featured: WiFi-Doctor, network root cause analysis
+
+<a href="https://github.com/yakov-ashgar27/wifi-doctor"><img src="https://github.com/yakov-ashgar27/wifi-doctor/raw/main/docs/dashboard.png" alt="WiFi-Doctor dashboard diagnosing bufferbloat" width="760"></a>
+
+"The Internet is slow" can mean weak Wi-Fi, a saturated link, a congested ISP or a slow DNS server. WiFi-Doctor probes every layer of the path every 1.5 seconds and names the one that is failing, in plain English, with a confidence score and the fix.
+
+- **Explainable RCA engine:** a deterministic decision tree over gateway, WAN and DNS latency, jitter and loss. It is combined with adaptive baselines (a robust median/MAD z-score per hop), so it catches degradations that are abnormal *for this network* even below the static thresholds.
+- **Physical-layer evidence:** reads RSSI, band and channel from `netsh` (locale-tolerant, works on Hebrew Windows), `iw` and macOS, then cites them in the diagnosis: *"weak Wi-Fi signal (−78 dBm) on 2.4 GHz channel 6: switch to 5 GHz"*.
+- **Active bufferbloat test:** an 8-second load test that compares loaded and unloaded latency and grades the connection A+ to F. It has a concurrency guard and a hard timeout.
+- **Validated on a real laptop, not just in CI:** the test graded the home network **C** in 3 of 3 runs (+71 to +107 ms under load), and all four fault simulations were diagnosed correctly. Field testing found 5 bugs that 60+ unit tests missed; each is fixed and documented with a regression test.
+
+**Stack:** Python 3.13 · FastAPI · WebSockets · asyncio · NumPy · scapy / ICMP / ping fallback chain · SQLite · React · TypeScript · Tailwind · Recharts · Docker · GitHub Actions
+
+[**View the repo →**](https://github.com/yakov-ashgar27/wifi-doctor) · [**Release notes →**](https://github.com/yakov-ashgar27/wifi-doctor/releases/tag/v1.1.1)
+
 ## Featured: GuardStream, real-time fraud detection
 
 <a href="https://github.com/yakov-ashgar27/guardstream"><img src="https://github.com/yakov-ashgar27/guardstream/raw/main/docs/dashboard.jpg" alt="GuardStream SOC dashboard" width="760"></a>
@@ -29,4 +44,5 @@ A streaming system that scores every card transaction as it arrives and decides 
 
 - **Engineering beyond the code:** requirements (user stories, ERD, DFD), RBAC, migrations, offline sync, CI that tests on several databases, and real-device testing that feeds back into calibration.
 - **Data and real-time systems:** streaming pipelines, explainable scoring that combines rules with ML, and metrics measured against ground truth instead of guessed.
+- **Systems and networking:** active network probing with graceful privilege fallbacks, statistical anomaly detection, and testing on real hardware to find the bugs that CI can't.
 - **Shipping:** each project can be opened or installed with one click, as a PWA, a Windows shortcut or a cloud deployment.

@@ -130,7 +130,7 @@ An AI assistant that has read every one of my repositories. Each answer cites th
 
 - **BM25 search engine written from scratch**, with one tokenizer for both Hebrew and code.
 - Fact cards generated from the code (via `ast`) for every function, class, route and table.
-- Measured: the right file reaches the model for **89%** of test questions and **95% of 750** auto-generated ones. CI fails if accuracy drops.
+- Measured: the right file reaches the model for **89%** of test questions and **93% of 750** auto-generated ones. CI fails if accuracy drops.
 
 `Python (zero dependencies)` `JavaScript` `LLM APIs` `SSE streaming` `GitHub Actions`
 
